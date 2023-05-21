@@ -15,6 +15,7 @@ echo "export ECE3574_REFERENCE_ENV=Y" >> /etc/environment
 apt-get -y install build-essential
 apt-get -y install cmake valgrind lcov graphviz doxygen
 apt-get -y install python3-pip
+apt-get -y install clang clang-tidy xvfb
 pip3 install gcovr
 pip3 install pexpect
 
@@ -36,12 +37,12 @@ BOOTSTRAP
 #-----------------------------------------------------------------------
 
 Vagrant.configure("2") do |config|
-  config.vm.box = "hashicorp/bionic64"
-  config.vm.boot_timeout = 600
+  config.vm.box = "ubuntu/bionic64"
+  config.vm.boot_timeout = 1200
 
   # get rid of annoying console.log file and start the GUI 
   config.vm.provider "virtualbox" do |vb|
-    vb.customize [ "modifyvm", :id, "--uartmode1", "off" ]
+    vb.customize [ "modifyvm", :id, "--uartmode1", "disconnected" ]
     vb.gui = true
   end
 

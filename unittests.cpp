@@ -12,6 +12,8 @@
 #include "tokenize.hpp"
 #include <iostream>
 
+
+
 static Expression run(const std::string& program) {
 
 	std::istringstream iss(program);
@@ -45,7 +47,7 @@ TEST_CASE("Test Double", "[types]") {
 	REQUIRE(token_to_atom(token, a));
 	REQUIRE(a.type == NumberType);
 	REQUIRE(a.value.num_value == -120);
-	
+
 	token = "1e-4";
 	REQUIRE(token_to_atom(token, a));
 	REQUIRE(a.type == NumberType);
@@ -182,6 +184,7 @@ TEST_CASE("Solve tree 3", "[interpreter]") {
 	bool ok = interp.parse(iss);
 	REQUIRE_THROWS_AS(interp.eval(), InterpreterSemanticError);
 }
+
 //testing both parse and evaluate from interpreter.cpp
 TEST_CASE("Solve tree 4", "[interpreter]") {
 
@@ -192,7 +195,7 @@ TEST_CASE("Solve tree 4", "[interpreter]") {
 }
 //testing both parse and evaluate from interpreter.cpp
 TEST_CASE("Solve tree 5", "[interpreter]") {
-	
+
 	std::string program = "(- a b)";
 	Interpreter interp;
 	std::istringstream iss(program);
@@ -207,4 +210,133 @@ TEST_CASE("test Defines", "[interpreter]") {
 	Expression result = run(program);
 	//std::cout << result << std::endl;
 	REQUIRE(result == Expression(true));
+}
+
+TEST_CASE("test (foo) and (fail)", "[interpreter]") {
+	std::string program = "(foo)";
+	Interpreter interp;
+	std::istringstream iss(program);
+	bool ok = interp.parse(iss);
+	//std::cout << interp.eval();
+	REQUIRE_THROWS_AS(interp.eval(), InterpreterSemanticError);
+
+	program = "(fail)";
+	std::istringstream iss2(program);
+	bool ok2 = interp.parse(iss);
+	REQUIRE_THROWS_AS(interp.eval(), InterpreterSemanticError);
+}
+
+TEST_CASE("test point", "[interpreter]") {
+	std::string program("(draw(point 10 10))");
+	Interpreter interp;
+	std::istringstream iss(program);
+	bool ok = interp.parse(iss);
+	Expression result = run(program);
+	Expression l;
+	l.head.type = PointType;
+	l.head.value.point_value.x = 10;
+	l.head.value.point_value.y = 10;
+	l.head.value.sym_value = "point";
+	REQUIRE(result == l);
+
+}
+
+TEST_CASE("test line", "[interpreter]") {
+	std::string program = "(draw (line (point 10 0) (point 0 10)))";
+	Interpreter interp;
+	std::istringstream iss(program);
+	bool ok = interp.parse(iss);
+	Expression result = run(program);
+	Expression l;
+	l.head.type = LineType;
+	l.head.value.line_value.first.x = 10;
+	l.head.value.line_value.first.y = 0;
+	l.head.value.line_value.second.x = 0;
+	l.head.value.line_value.second.y = 10;
+	l.head.value.sym_value = "line";
+	REQUIRE(result == l);
+}
+
+TEST_CASE("test arc", "[interpreter]") {
+	std::string program = "(draw (arc (point 0 0) (point 100 0) pi))";
+	Interpreter interp;
+	std::istringstream iss(program);
+	bool ok = interp.parse(iss);
+	Expression result = run(program);
+	Expression l;
+	l.head.type = ArcType;
+	l.head.value.arc_value.center.x = 0;
+	l.head.value.arc_value.center.y = 0;
+	l.head.value.arc_value.start.x = 100;
+	l.head.value.arc_value.start.y = 0;
+	l.head.value.arc_value.span = atan2(0, -1);
+	l.head.value.sym_value = "arc";
+	REQUIRE(result == l);
+}
+
+TEST_CASE("define arc", "[interpreter]") {
+	std::string program = "(begin (define arcReactor (arc (point 0 0) (point 100 0) pi)) (define z 1))";
+	Interpreter interp;
+	std::istringstream iss(program);
+	bool ok = interp.parse(iss);
+	Expression result = run(program);
+	Expression l;
+	l.head.type = NumberType;
+	l.head.value.num_value = 1;
+	/*l.head.value.arc_value.center.x = 0;
+	l.head.value.arc_value.center.y = 0;
+	l.head.value.arc_value.start.x = 100;
+	l.head.value.arc_value.start.y = 0;
+	l.head.value.arc_value.span = atan2(0, -1);
+	l.head.value.sym_value = "arc";*/
+	REQUIRE(result == Expression(1.));
+}
+
+TEST_CASE("define point", "[interpreter]") {
+	std::string program = "(begin (define pint (point 0 0)) (define z 1))";
+	Interpreter interp;
+	std::istringstream iss(program);
+	bool ok = interp.parse(iss);
+	Expression result = run(program);
+	Expression l;
+	l.head.type = NumberType;
+	l.head.value.num_value = 1;
+	REQUIRE(result == Expression(1.));
+}
+
+TEST_CASE("define line", "[interpreter]") {
+	std::string program = "(begin (define lyne (line (point 10 0) (point 0 10))) (define z 1))";
+	Interpreter interp;
+	std::istringstream iss(program);
+	bool ok = interp.parse(iss);
+	Expression result = run(program);
+	Expression l;
+	l.head.type = NumberType;
+	l.head.value.num_value = 1;
+	REQUIRE(result == Expression(1.));
+}
+
+TEST_CASE("symbol with value", "[interpreter]")
+{
+	Expression k(std::string("icecream"));
+	Expression morph;
+	morph.head.type = SymbolType;
+	morph.head.value.sym_value = "icecream";
+	REQUIRE(morph == k);
+
+	Expression math(std::string("pi"));
+	Expression morph2;
+	morph2.head.type = NumberType;
+	morph2.head.value.num_value = atan2(0, -1);
+	REQUIRE(morph2 == math);
+
+	Expression strn(std::string("2zzf42"));
+	Expression morph3;
+	morph3.head.type = NoneType;
+	REQUIRE(morph3 == strn);
+
+	Expression space(std::string("L M A O"));
+	Expression morph4;
+	morph4.head.type = NoneType;
+	REQUIRE(morph4 == space);
 }

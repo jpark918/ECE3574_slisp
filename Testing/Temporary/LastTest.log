@@ -1,0 +1,138 @@
+Start testing: Apr 19 17:57 UTC
+----------------------------------------------------------
+1/3 Testing: unittests
+1/3 Test: unittests
+Command: "/vagrant/unittests"
+Directory: /vagrant
+"unittests" start time: Apr 19 17:57 UTC
+Output:
+----------------------------------------------------------
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+unittests is a Catch v1.5.4 host application.
+Run with -? for options
+
+-------------------------------------------------------------------------------
+test point
+-------------------------------------------------------------------------------
+/vagrant/unittests.cpp:236
+...............................................................................
+
+/vagrant/unittests.cpp:247: FAILED:
+  REQUIRE( result == l )
+with expansion:
+   == False
+
+-------------------------------------------------------------------------------
+test line
+-------------------------------------------------------------------------------
+/vagrant/unittests.cpp:251
+...............................................................................
+
+/vagrant/unittests.cpp:264: FAILED:
+  REQUIRE( result == l )
+with expansion:
+   == False
+
+-------------------------------------------------------------------------------
+test arc
+-------------------------------------------------------------------------------
+/vagrant/unittests.cpp:267
+...............................................................................
+
+/vagrant/unittests.cpp:281: FAILED:
+  REQUIRE( result == l )
+with expansion:
+   == False
+
+Failed to parse file: /vagrant/tests/test_crlf.slp
+-------------------------------------------------------------------------------
+Test syntactically correct file using CRLF (Windows) line endings.
+-------------------------------------------------------------------------------
+/vagrant/test_interpreter.cpp:425
+...............................................................................
+
+/vagrant/test_interpreter.cpp:41: FAILED:
+  REQUIRE( ok == true )
+with expansion:
+  false == true
+
+-------------------------------------------------------------------------------
+Test all syntactically and semantically CORRECT files.
+-------------------------------------------------------------------------------
+/vagrant/test_interpreter.cpp:450
+...............................................................................
+
+/vagrant/test_interpreter.cpp:44: FAILED:
+  REQUIRE_NOTHROW( result = interp.eval() )
+due to unexpected exception with message:
+  Symbol has not been defined
+
+===============================================================================
+test cases:  50 |  45 passed | 5 failed
+assertions: 335 | 330 passed | 5 failed
+
+<end of output>
+Test time =   0.15 sec
+----------------------------------------------------------
+Test Failed.
+"unittests" end time: Apr 19 17:57 UTC
+"unittests" time elapsed: 00:00:00
+----------------------------------------------------------
+
+2/3 Testing: test_message
+2/3 Test: test_message
+Command: "/vagrant/test_message"
+Directory: /vagrant
+"test_message" start time: Apr 19 17:57 UTC
+Output:
+----------------------------------------------------------
+********* Start testing of TestMessage *********
+Config: Using QtTest library 5.9.5, Qt 5.9.5 (x86_64-little_endian-lp64 shared (dynamic) release build; by GCC 7.5.0)
+PASS   : TestMessage::initTestCase()
+PASS   : TestMessage::testConstructor()
+PASS   : TestMessage::cleanupTestCase()
+Totals: 3 passed, 0 failed, 0 skipped, 0 blacklisted, 0ms
+********* Finished testing of TestMessage *********
+<end of output>
+Test time =   0.11 sec
+----------------------------------------------------------
+Test Passed.
+"test_message" end time: Apr 19 17:57 UTC
+"test_message" time elapsed: 00:00:00
+----------------------------------------------------------
+
+3/3 Testing: test_gui
+3/3 Test: test_gui
+Command: "/vagrant/test_gui"
+Directory: /vagrant
+"test_gui" start time: Apr 19 17:57 UTC
+Output:
+----------------------------------------------------------
+********* Start testing of TestGUI *********
+Config: Using QtTest library 5.9.5, Qt 5.9.5 (x86_64-little_endian-lp64 shared (dynamic) release build; by GCC 7.5.0)
+PASS   : TestGUI::initTestCase()
+PASS   : TestGUI::testREPLGood()
+PASS   : TestGUI::testREPLBad()
+PASS   : TestGUI::testREPLBad2Good()
+PASS   : TestGUI::testPoint()
+PASS   : TestGUI::testLine()
+QDEBUG : TestGUI::testArc() QGraphicsItem(0x5561f45cbc60, pos=0,0)
+QDEBUG : TestGUI::testArc() QRectF(-100.5,-100.5 201x101)
+PASS   : TestGUI::testArc()
+QDEBUG : TestGUI::testEnvRestore() QGraphicsItem(0)
+QDEBUG : TestGUI::testEnvRestore() QGraphicsItem(0)
+PASS   : TestGUI::testEnvRestore()
+PASS   : TestGUI::testMessage()
+PASS   : TestGUI::cleanupTestCase()
+Totals: 10 passed, 0 failed, 0 skipped, 0 blacklisted, 5116ms
+********* Finished testing of TestGUI *********
+<end of output>
+Test time =   5.28 sec
+----------------------------------------------------------
+Test Passed.
+"test_gui" end time: Apr 19 17:57 UTC
+"test_gui" time elapsed: 00:00:05
+----------------------------------------------------------
+
+End testing: Apr 19 17:57 UTC

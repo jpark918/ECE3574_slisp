@@ -1,7 +1,6 @@
 #include <cstdlib>
 
-
-//I added this stuff
+//Jihoon Added
 #include "environment.hpp"
 #include "interpreter.hpp"
 #include "expression.hpp"
@@ -43,20 +42,6 @@ int main(int argc, char** argv)
 				if (gate) {
 					//std::cout << "gate == true" << std::endl;
 					try {
-						/*
-						if (in.substr(1, 6) == "define"){  //saving the define variable
-							string transfer;
-							for (int i = 8; i < in.size(); i++) {
-								if (in[i] != ' ') {
-									transfer.push_back(in[i]);
-								}
-								else {
-									savevar.push_back(transfer);
-									break;
-								}
-							}
-							//cout << "captured variable is: " << transfer << endl;
-						}*/
 						Expression result = interp.eval();
 						//savevalue.push_back(result); //saving Number/Bool value
 						std::cout << "(" << result << ")" << std::endl;
@@ -72,7 +57,7 @@ int main(int argc, char** argv)
 				}
 			}
 		}
-		return EXIT_SUCCESS;
+		//return EXIT_SUCCESS;
 	}
 	else if (argc == 3 && arguments[1] == "-e") { //TestExecuteCommandline from autograder
 		//std::cout << "-e condition" << std::endl;

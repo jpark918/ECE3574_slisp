@@ -1,7 +1,3 @@
-// ==================================================
-// DO NOT CHANGE THIS FILE
-// ==================================================
-
 #include "catch.hpp"
 
 #include <string>
@@ -62,7 +58,6 @@ TEST_CASE( "Test Tokenizer with single non-keyword", "[tokenize]" ) {
   REQUIRE( tokens[0] == "hello" );
 }
 
-
 TEST_CASE( "Test Tokenizer with empty input", "[tokenize]" ) {
 
   std::string program;
@@ -71,7 +66,7 @@ TEST_CASE( "Test Tokenizer with empty input", "[tokenize]" ) {
 
   TokenSequenceType tokens = tokenize(iss);
   
-  REQUIRE( tokens.size() == 0);
+  REQUIRE( tokens.size() == 0 );
 }
 
 TEST_CASE( "Test Tokenizer with empty expression", "[tokenize]" ) {

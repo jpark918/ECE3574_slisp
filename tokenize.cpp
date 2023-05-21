@@ -3,6 +3,7 @@
 
 #include <iostream>
 
+//Jihoon Added
 using namespace std;
 #include <sstream>
 
@@ -11,21 +12,19 @@ using namespace std;
 // ignores any whitespace and from any ";" to end-of-line
 TokenSequenceType tokenize(std::istream& seq) {
 	TokenSequenceType tokens;
-
 	// TODO: implement your code here
-
 	char c;
 	string store;
 	bool skip = false;
-
 	//char r; not needed
 	int delay1 = 0;
-
 	while (seq.get(c)) {
 		//cout << "Current Character: " << c << endl;
-		if (c == '\n' && skip ) {
+		if (c == '\r' && skip) {
 			delay1++;
-			//skip = false;
+		}
+		else if ( c == '\n' && skip) {
+			delay1++;
 		}
 		if (delay1 == 0) {
 			if (c != ';' && !skip) {
@@ -37,8 +36,6 @@ TokenSequenceType tokenize(std::istream& seq) {
 					store.push_back(c);
 					tokens.push_back(store);
 					store.clear();
-					//store.append(c);
-					//cout << "( or ) or ;" << store << endl;
 				}
 				else if (c == ' ') {
 					if (!store.empty()) {
@@ -47,11 +44,7 @@ TokenSequenceType tokenize(std::istream& seq) {
 					}
 				}
 				else { //valid character
-					//ss << c;
-					//ss >> store;
 					store.push_back(c);
-					//store.append(c);
-					//cout << "valid character: " << store << endl;
 				}
 			}
 			else {
@@ -63,7 +56,6 @@ TokenSequenceType tokenize(std::istream& seq) {
 			skip = false;
 		}
 	}
-
 	if (!store.empty()) {
 		tokens.push_back(store);
 	}

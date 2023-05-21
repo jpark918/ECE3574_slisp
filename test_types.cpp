@@ -1,7 +1,3 @@
-// ==================================================
-// DO NOT CHANGE THIS FILE
-// ==================================================
-
 #include "catch.hpp"
 
 #include <string>
@@ -16,12 +12,12 @@ TEST_CASE( "Test Type Inference", "[types]" ) {
   REQUIRE(token_to_atom(token, a));
   REQUIRE(a.type == BooleanType);
   REQUIRE(a.value.bool_value == true);
-  
+
   token = "False";
   REQUIRE(token_to_atom(token, a));
   REQUIRE(a.type == BooleanType);
   REQUIRE(a.value.bool_value == false);
-  
+
   token = "1";
   REQUIRE(token_to_atom(token, a));
   REQUIRE(a.type == NumberType);
@@ -31,12 +27,12 @@ TEST_CASE( "Test Type Inference", "[types]" ) {
   REQUIRE(token_to_atom(token, a));
   REQUIRE(a.type == NumberType);
   REQUIRE(a.value.num_value == -1);
-  
+
   token = "var";
   REQUIRE(token_to_atom(token, a));
   REQUIRE(a.type == SymbolType);
   REQUIRE(a.value.sym_value == "var");
-  
+
   token = "1abc";
   REQUIRE(!token_to_atom(token, a));
 
@@ -44,9 +40,8 @@ TEST_CASE( "Test Type Inference", "[types]" ) {
   REQUIRE(token_to_atom(token, a));
   REQUIRE(a.type == SymbolType);
   REQUIRE(a.value.sym_value == token);
-  
-}
 
+}
 
 TEST_CASE( "Test Expression Constructors", "[types]" ) {
 
