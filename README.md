@@ -4,12 +4,12 @@ An introduction to applied software design methods for use in the writing of eff
 Introduction
 -------------
 
-Slisp is a semester long software project for ECE 3574 written in C++. The starter code for the project implements the basic language interpreter for a language we will call Slisp (slisp) and uses a TUI to evaluate basic math functions such as addition, subtraction, and multiplication. Throughout the semester there were 5 milestones where I was asked to implement new functionality and expand on present functionality of the starter code.
+Slisp is a semester long software project for ECE 3574 written in C++. The starter code for the project implements the basic language interpreter for a language we will call Slisp (slisp) and uses a TUI to evaluate basic math functions such as addition, subtraction, and multiplication. Throughout the semester there were 2 projects where I was asked to implement new functionality and expand on present functionality of the starter code.
 
 Slisp Overview
 ---------------------
 
-Slisp uses a prefix Lisp notation (also called [s-expressions](https://en.wikipedia.org/wiki/S-expression)). A plotscript program then is just one, possibly very complex, expression. For example the following program is roughly equivalent to the C++ one above.
+Slisp uses a prefix Lisp notation (also called [s-expressions](https://en.wikipedia.org/wiki/S-expression)). A Slisp program then is just one, possibly very complex, expression. For example the following program is roughly equivalent to the C++ one above.
 
 ```
 (define x (/  (* (+ 1 2) 3) 4))
