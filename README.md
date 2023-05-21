@@ -127,4 +127,5 @@ Added throughout the milestones:
 	
 
  # Resources
- https://norvig.com/lispy.html
+ <br> https://norvig.com/lispy.html </br>
+ ReadME.md information relies on [ZacKracht22's ](https://github.com/ZacKracht22/Plotscript) plotscript repository
